@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block nav %}
+    <nav>
+        <a href="/">Головна</a>
+    </nav>
+{% endblock %}
+
+{% block main %}
+    <main>
+        <h1 class="form-title text-center">Заповніть форму або залиште питання.</h1>
+        {% if not check %}
+            <h3 class="text-center" style="color: red; margin-bottom: 20px">Ви не дали згоду на обробку даних</h3>
+        {% endif %}
+        <form method="post" class="form d-flex flex-column align-items-center">
+            <p>
+                <label for="surname">Прізвище:</label>
+                <input type="text" name="surname" id="surname">
+            </p>
+            <p>
+                <label for="name">Ім'я:</label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="flat_num">Номер квартири:</label>
+                <input type="text" name="flat_num" id="flat_num">
+            </p>
+            <p>
+                <label for="email">Електронна скринька:</label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="message">Текст повідомлення:</label>
+                <textarea rows="10" name="message" id="message"></textarea>
+            </p>
+            <p>
+                <input name="agree" type="checkbox" id="agree">
+                <label for="agree" class="confirm">Даю згоду на обробку особистих даних</label>
+            </p>
+            <button type="submit" class="submit">Надіслати</button>
+        </form>
+    </main>
+{% endblock %}

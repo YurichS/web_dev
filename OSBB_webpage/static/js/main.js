@@ -4,18 +4,10 @@ $(document).ready(function () {
         $("html, body").animate({
             scrollTop: $($(this).attr("href")).offset().top - 100
         }, {
-            duration: 500,
+            duration: 50,
             easing: "swing"
         });
         return false;
-    });
-    //Функція для появи бургер-меню
-    $('.sidebarBtn').click(function () {
-        $('.sidebar').toggleClass('active')
-    });
-    //Функція для зникнення бургер-меню
-    $('.sidebarLi a').click(function () {
-        $('.sidebar').toggleClass('active')
     });
     //Функція, яка відповідає за зникнення кнопки "Вгору" на початку сторінки
     $(window).scroll(function () {
@@ -27,6 +19,6 @@ $(document).ready(function () {
     });
     //Функція для переходу на початок сторінки
     $('#ScrTopBtn').click(function () {
-        $('html,body').animate({scrollTop:0}, 800);
+        $('html,body').animate({scrollTop:0}, 80);
     });
 })

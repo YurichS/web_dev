@@ -9,41 +9,31 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="static/js/main.js"></script>
 </head>
 <body id="main-page">
-<?php 
-      $file= @file('files/counter.txt');
-      $count = @implode('', $file);
-      $count++;
-      $myFile=fopen('files/counter.txt','w');
-      fputs($myFile, $count);
-      fclose($myFile);
-?>
 <header class="d-flex align-items-center justify-content-between">
     <div class="d-flex flex-column align-items-center justify-content-center logo">
         <h1>ОСББ</h1>
         <p class="abbr">Об'єднання співвласників багатоквартирного будинку</p>
     </div>
-    <div class="sidebar">
-        <ul class="sidebarUl">
-            <li class="sidebarLi"><a href="#main-page">Головна</a></li>
-            <li class="sidebarLi"><a href="#news">Новини</a></li>
-            <li class="sidebarLi"><a href="#projects">Проекти</a></li>
-            <li class="sidebarLi"><a href="#debtors">Боржники</a></li>
-            <li class="sidebarLi"><a href="#contacts">Контакти</a></li>
-            <li class="sidebarLi"><a href="form.php">Залишити повідомлення</a></li>
-        </ul>
-        <button class="sidebarBtn d-flex align-items-center justify-content-center">
-            <span></span>
-        </button>
+    <div class="d-flex justify-content-between nav-header-spaces">
+        {% block nav %}
+        <nav>
+            <a href="#main-page">Головна</a>
+            <a href="#news">Новини</a>
+            <a href="#projects">Проекти</a>
+            <a href="#debtors">Боржники</a>
+            <a href="#contacts">Контакти</a>
+            <a href="qa">Запитання/Пропозиції</a>
+        </nav>
+        {% endblock %}
     </div>
 </header>
+{% block main %}
 <main class="d-flex align-items-center">
-    <p class="view-line">Кількість переглядів: <?=$count?></p>
     <section class="d-flex align-items-center">
         <p class="text-design">
             ОСББ було створене для покращення житлових умов. <br>
@@ -51,7 +41,7 @@
             електронну скриньку чи в наших соцмережах. <br>
             Також, за необхідності, можна заернутись у головний офіс у під'їзді №1.<br>
         </p>
-        <img src="img/main.jpg" alt="main image">
+        <img src="static/img/main.jpg" alt="main image">
     </section>
     <section id="news" class="d-flex align-items-center">
         <div>
@@ -64,7 +54,7 @@
             </ul>
         </div>
 
-        <img src="img/news.jpg" alt="news image">
+        <img src="static/img/news.jpg" alt="news image">
     </section>
     <section id="projects" class="d-flex align-items-center">
         <div>
@@ -75,9 +65,7 @@
                 <li>Подано заяву на відновлення пішохідних доріжок.</li>
             </ul>
         </div>
-
-
-        <img src="img/project.jpg" alt="project image">
+        <img src="static/img/project.jpg" alt="project image">
     </section>
     <section id="debtors">
         <h2>Таблиця боржників</h2>
@@ -85,22 +73,22 @@
             терміну сплати
             боргу будуть
             застосоувватись санкції.</b></p>
-        <?php
-        $f = fopen("files/info.txt", "r");
-        $col = 0;
-        $i = 0;
-	echo "<table>";
-	echo "<tr><th>ПІБ</th><th>Борг(грн)</th></tr>";
-        while(!feof($f)){
-		$inf = fgets($f);
-	    	echo "<tr><td>".str_replace(',','</td><td>', $inf)."</td></tr>";
-	}
-	echo "</table>";
-        fclose($f);
-        ?>
+        <table>
+            <tr>
+                <th>ПІБ</th>
+                <th>Борг(грн)</th>
+            </tr>
+            {% for inf in info %}
+            <tr>
+                <td>{{ inf[0] }}</td>
+                <td>{{ inf[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </section>
     <button id="ScrTopBtn">Вгору</button>
 </main>
+{% endblock main %}
 <footer id="contacts" class="d-flex flex-column align-items-center justify-content-center">
     <h2>Наші контакти</h2>
     <ul>

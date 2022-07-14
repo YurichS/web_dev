@@ -1,0 +1,34 @@
+{% extends "qa_form.html" %}
+{% block main %}
+    <main>
+        <h1 class="form-title text-center">Заповніть форму або залиште питання.</h1>
+        <h3 class="text-center" style="color: red; margin-bottom: 20px; margin-top: -20px">Заповніть всі поля</h3>
+        <form method="post" class="form d-flex flex-column align-items-center">
+            <p>
+                <label for="surname">Прізвище:</label>
+                <input type="text" name="surname" id="surname" value="{{ surname }}">
+            </p>
+            <p>
+                <label for="name">Ім'я:</label>
+                <input type="text" name="name" id="name" value={{ name }}>
+            </p>
+            <p>
+                <label for="flat_num">Номер квартири:</label>
+                <input type="text" name="flat_num" id="flat_num" value={{ flat_num }}>
+            </p>
+            <p>
+                <label for="email">Електронна скринька:</label>
+                <input type="text" name="email" id="email" value="{{ email }}">
+            </p>
+            <p>
+                <label for="message">Текст повідомлення:</label>
+                <textarea rows="10" name="message" id="message">{{ message }}</textarea>
+            </p>
+            <p>
+                <input name="agree" type="checkbox" id="agree">
+                <label for="agree" class="confirm">Даю згоду на обробку особистих даних</label>
+            </p>
+            <button type="submit" class="submit">Надіслати</button>
+        </form>
+    </main>
+{% endblock %}
