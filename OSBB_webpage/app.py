@@ -25,6 +25,11 @@ def qa_message(surname, name, flat_num, email, message):
     cnxn.commit()
 
 
+def form_fullness(surname, name, flat_num, email, message, agreement):
+    if not surname or not name or not flat_num or not email or not message or not agreement:
+        return True
+    return False
+
 @app.route('/', methods=['POST', 'GET'])
 def main():
     return render_template('index.html', info=debtors_info())
@@ -39,8 +44,8 @@ def QA():
         flat_num = request.form.get('flat_num')
         email = request.form.get('email')
         message = request.form.get('message')
-        if not surname or not name or not flat_num or not email or not message or not request.form.getlist(
-                'agree'):
+        agreement = request.form.getlist('agree')
+        if form_fullness(surname, name, flat_num, email, message, agreement):
             return render_template('qa_error.html', surname=surname, name=name, flat_num=flat_num, email=email,
                                    message=message)
         else:

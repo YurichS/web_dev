@@ -6,19 +6,19 @@
         <form method="post" class="form d-flex flex-column align-items-center">
             <p>
                 <label for="surname">Прізвище:</label>
-                <input type="text" name="surname" id="surname" value="{{ surname }}">
+                <input type="text" name="surname" id="surname" pattern="\w*" value="{{ surname }}">
             </p>
             <p>
                 <label for="name">Ім'я:</label>
-                <input type="text" name="name" id="name" value={{ name }}>
+                <input type="text" name="name" id="name" pattern="\w*" value={{ name }}>
             </p>
             <p>
                 <label for="flat_num">Номер квартири:</label>
-                <input type="text" name="flat_num" id="flat_num" value={{ flat_num }}>
+                <input type="number" name="flat_num" id="flat_num" pattern="\i*" min="1" value={{ flat_num }}>
             </p>
             <p>
                 <label for="email">Електронна скринька:</label>
-                <input type="text" name="email" id="email" value="{{ email }}">
+                <input type="email" name="email" id="email" value="{{ email }}">
             </p>
             <p>
                 <label for="message">Текст повідомлення:</label>
