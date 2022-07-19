@@ -2,6 +2,9 @@
 {% block main %}
     <main>
         <h1 class="form-title text-center">Заповніть форму або залиште питання.</h1>
+        {% if not check %}
+            <h3 class="text-center" style="color: red; margin-bottom: 20px">Ви не дали згоду на обробку даних</h3>
+        {% endif %}
         <h3 class="text-center" style="color: red; margin-bottom: 20px">Заповніть всі поля</h3>
         <form method="post" class="form d-flex flex-column align-items-center">
             <p>

@@ -21,73 +21,81 @@
     </div>
     <div class="d-flex justify-content-between nav-header-spaces">
         {% block nav %}
-        <nav>
-            <a href="#main-page">Головна</a>
-            <a href="#news">Новини</a>
-            <a href="#projects">Проекти</a>
-            <a href="#debtors">Боржники</a>
-            <a href="#contacts">Контакти</a>
-            <a href="qa">Запитання/Пропозиції</a>
-        </nav>
+            <nav>
+                <a href="#main-page">Головна</a>
+                <a href="#news">Новини</a>
+                <a href="#projects">Проекти</a>
+                <a href="#debtors">Боржники</a>
+                <a href="#contacts">Контакти</a>
+                <a href="qa">Запитання/Пропозиції</a>
+            </nav>
         {% endblock %}
     </div>
 </header>
 {% block main %}
-<main class="d-flex align-items-center">
-    <section class="d-flex align-items-center">
-        <p class="text-design">
-            ОСББ було створене для покращення житлових умов. <br>
-            Усі свої бажання та пропозиції можна висловити на гарячу лінію, <br>
-            електронну скриньку чи в наших соцмережах. <br>
-            Також, за необхідності, можна заернутись у головний офіс у під'їзді №1.<br>
-        </p>
-        <img src="static/img/main.jpg" alt="main image">
-    </section>
-    <section id="news" class="d-flex align-items-center">
-        <div>
-            <h2>Новини</h2>
-            <ul class="text-design">
-                <li>Триває збір коштів на очистку і збільшення ставка у парку.</li>
-                <li>Шукаємо садівника для догляду за парком і клумбами.</li>
-                <li>Отримано дозвіл на будівництво скейт-парку.</li>
-                <li>Запрошуємо всіх охочиш приєднатись до толоки цієї суботи.</li>
-            </ul>
-        </div>
+    <main class="d-flex align-items-center">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h4 class="text-center text-success"><strong>{{ message }}</strong></h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <section class="d-flex align-items-center">
+            <p class="text-design">
+                ОСББ було створене для покращення житлових умов. <br>
+                Усі свої бажання та пропозиції можна висловити на гарячу лінію, <br>
+                електронну скриньку чи в наших соцмережах. <br>
+                Також, за необхідності, можна заернутись у головний офіс у під'їзді №1.<br>
+            </p>
+            <img src="static/img/main.jpg" alt="main image">
+        </section>
+        <section id="news" class="d-flex align-items-center">
+            <div>
+                <h2>Новини</h2>
+                <ul class="text-design">
+                    <li>Триває збір коштів на очистку і збільшення ставка у парку.</li>
+                    <li>Шукаємо садівника для догляду за парком і клумбами.</li>
+                    <li>Отримано дозвіл на будівництво скейт-парку.</li>
+                    <li>Запрошуємо всіх охочиш приєднатись до толоки цієї суботи.</li>
+                </ul>
+            </div>
 
-        <img src="static/img/news.jpg" alt="news image">
-    </section>
-    <section id="projects" class="d-flex align-items-center">
-        <div>
-            <h2>Проекти</h2>
-            <ul class="text-design">
-                <li>Будівництво скейт-парку вже почато.</li>
-                <li>Планується висадка дерев і озеленення прибудинкових територій.</li>
-                <li>Подано заяву на відновлення пішохідних доріжок.</li>
-            </ul>
-        </div>
-        <img src="static/img/project.jpg" alt="project image">
-    </section>
-    <section id="debtors">
-        <h2>Таблиця боржників</h2>
-        <p style="color: red; font-size: 18px"><b>Боржники повинні сплатити борги в найкоротші термніни. При перевищенні
-            терміну сплати
-            боргу будуть
-            застосоувватись санкції.</b></p>
-        <table>
-            <tr>
-                <th>ПІБ</th>
-                <th>Борг(грн)</th>
-            </tr>
-            {% for inf in info %}
-            <tr>
-                <td>{{ inf[0] }}</td>
-                <td>{{ inf[1] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
-    <button id="ScrTopBtn">Вгору</button>
-</main>
+            <img src="static/img/news.jpg" alt="news image">
+        </section>
+        <section id="projects" class="d-flex align-items-center">
+            <div>
+                <h2>Проекти</h2>
+                <ul class="text-design">
+                    <li>Будівництво скейт-парку вже почато.</li>
+                    <li>Планується висадка дерев і озеленення прибудинкових територій.</li>
+                    <li>Подано заяву на відновлення пішохідних доріжок.</li>
+                </ul>
+            </div>
+            <img src="static/img/project.jpg" alt="project image">
+        </section>
+        <section id="debtors">
+            <h2>Таблиця боржників</h2>
+            <p style="color: red; font-size: 18px"><b>Боржники повинні сплатити борги в найкоротші термніни. При
+                перевищенні
+                терміну сплати
+                боргу будуть
+                застосоувватись санкції.</b></p>
+            <table>
+                <tr>
+                    <th>ПІБ</th>
+                    <th>Борг(грн)</th>
+                </tr>
+                {% for inf in info %}
+                    <tr>
+                        <td>{{ inf[0] }}</td>
+                        <td>{{ inf[1] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </section>
+        <button id="ScrTopBtn">Вгору</button>
+    </main>
 {% endblock main %}
 <footer id="contacts" class="d-flex flex-column align-items-center justify-content-center">
     <h2>Наші контакти</h2>

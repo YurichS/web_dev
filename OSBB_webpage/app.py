@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import pyodbc as pdb
 
 app = Flask(__name__)
+app.secret_key = 'hello'
 
 
 def db_connection():
@@ -30,13 +31,19 @@ def form_fullness(surname, name, flat_num, email, message, agreement):
         return True
     return False
 
-@app.route('/', methods=['POST', 'GET'])
+
+@app.route('/')
 def main():
     return render_template('index.html', info=debtors_info())
 
 
-@app.route('/qa', methods=['POST', 'GET'])
+@app.get('/qa')
 def QA():
+    return render_template('qa_form.html')
+
+
+@app.post('/qa')
+def QA_send():
     check = True
     if request.method == 'POST':
         surname = request.form.get('surname')
@@ -47,11 +54,11 @@ def QA():
         agreement = request.form.getlist('agree')
         if form_fullness(surname, name, flat_num, email, message, agreement):
             return render_template('qa_error.html', surname=surname, name=name, flat_num=flat_num, email=email,
-                                   message=message)
+                                   message=message, check=agreement)
         else:
             qa_message(surname, name, flat_num, email, message)
+            flash('Ваше питання надіслано! Дякуємо за співпрацю!', 'info')
             return redirect(url_for('main'))
-    return render_template('qa_form.html', check=check)
 
 
 if __name__ == '__main__':
