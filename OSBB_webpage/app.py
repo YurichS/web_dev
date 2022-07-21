@@ -44,21 +44,19 @@ def QA():
 
 @app.post('/qa')
 def QA_send():
-    check = True
-    if request.method == 'POST':
-        surname = request.form.get('surname')
-        name = request.form.get('name')
-        flat_num = request.form.get('flat_num')
-        email = request.form.get('email')
-        message = request.form.get('message')
-        agreement = request.form.getlist('agree')
-        if form_fullness(surname, name, flat_num, email, message, agreement):
-            return render_template('qa_error.html', surname=surname, name=name, flat_num=flat_num, email=email,
-                                   message=message, check=agreement)
-        else:
-            qa_message(surname, name, flat_num, email, message)
-            flash('Ваше питання надіслано! Дякуємо за співпрацю!', 'info')
-            return redirect(url_for('main'))
+    surname = request.form.get('surname')
+    name = request.form.get('name')
+    flat_num = request.form.get('flat_num')
+    email = request.form.get('email')
+    message = request.form.get('message')
+    agreement = request.form.getlist('agree')
+    if form_fullness(surname, name, flat_num, email, message, agreement):
+        return render_template('qa_error.html', surname=surname, name=name, flat_num=flat_num, email=email,
+                               message=message, check=agreement)
+    else:
+        qa_message(surname, name, flat_num, email, message)
+        flash('Ваше питання надіслано! Дякуємо за співпрацю!', 'info')
+        return redirect(url_for('main'))
 
 
 if __name__ == '__main__':
